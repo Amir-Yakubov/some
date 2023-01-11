@@ -1,0 +1,37 @@
+/* Setup */
+@import "setup/vars.css";
+@import "setup/typography.css";
+
+/* Base */
+@import "base/base.css";
+@import "base/helpers.css";
+@import "base/layout.css";
+@import "base/forms.css";
+
+/* Components */
+@import "cmps/app-header.css";
+@import "cmps/toggle-btn.css";
+@import "cmps/user-msg.css";
+
+@import "cmps/toy-filter.css";
+@import "cmps/toy-list.css";
+@import "cmps/toy-preview.css";
+
+@import "cmps/shopping-cart.css";
+@import "cmps/home-page.css";
+@import "cmps/toy-index.css";
+@import "cmps/dashboard.css";
+@import "cmps/about-us.css";
+
+.popup-menu {
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    background-color: white;
+    border: red 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

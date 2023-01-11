@@ -1,0 +1,17 @@
+.app-header {
+  background-color: #86c232;
+  color: white;
+  padding: 0.5rem 3.6rem ;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+@media(max-width: 720px) {
+  .app-header {
+    color: var(--clr2bg);
+  }
+}
