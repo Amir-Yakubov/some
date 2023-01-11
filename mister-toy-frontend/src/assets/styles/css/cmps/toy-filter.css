@@ -1,0 +1,15 @@
+.toy-filter {
+  background-color: var(--gray1);
+  padding: 1em;
+}
+
+label {
+  font-size: 1.17rem;
+  display: block;
+}
+
+.basic-multi-select {
+  width: 300px;
+}
+
+/*# sourceMappingURL=toy-filter.css.map */

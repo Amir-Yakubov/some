@@ -1,0 +1,15 @@
+.enter-shop {
+  padding: 10px 30px;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: #86c232;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  border-radius: 6rem;
+  border: 1px solid rgba(0, 0, 0, 0.2196078431);
+  background-color: rgba(217, 255, 213, 0.4392156863);
+}
+
+/*# sourceMappingURL=home-page.css.map */

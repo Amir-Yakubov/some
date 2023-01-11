@@ -1,0 +1,31 @@
+.main-layout {
+  margin: 0 auto;
+  max-width: 1380px;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.container {
+  max-width: 800px;
+  padding: 1em;
+  margin: auto;
+}
+
+footer {
+  background-color: rgba(165, 133, 74, 0.63);
+  color: white;
+  padding: 1em;
+  width: 100vw;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  /* display: block; */
+  z-index: 10;
+}
+
+section.app {
+  min-height: 100vh;
+}
+
+/*# sourceMappingURL=layout.css.map */
