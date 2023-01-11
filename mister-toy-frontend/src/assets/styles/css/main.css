@@ -1,5 +1,7 @@
 @charset "UTF-8";
 /* Setup */
+@import url("https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 :root {
   --clr1: #0a9396;
   --clr2: brown;
@@ -12,6 +14,10 @@
   --gray3: rgb(44, 44, 44);
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/BuenosAires-Regular.ttf") format("ttf");
+}
 /* Base */
 * {
   box-sizing: border-box;
