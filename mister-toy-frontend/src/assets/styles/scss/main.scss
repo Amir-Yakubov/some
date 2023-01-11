@@ -1,27 +1,27 @@
 /* Setup */
-@import "setup/vars.css";
-@import "setup/typography.css";
+@import "setup/vars";
+@import "setup/typography";
 
 /* Base */
-@import "base/base.css";
-@import "base/helpers.css";
-@import "base/layout.css";
-@import "base/forms.css";
+@import "base/base";
+@import "base/helpers";
+@import "base/layout";
+@import "base/forms";
 
 /* Components */
-@import "cmps/app-header.css";
-@import "cmps/toggle-btn.css";
-@import "cmps/user-msg.css";
+@import "cmps/app-header";
+@import "cmps/toggle-btn";
+@import "cmps/user-msg";
 
-@import "cmps/toy-filter.css";
-@import "cmps/toy-list.css";
-@import "cmps/toy-preview.css";
+@import "cmps/toy-filter";
+@import "cmps/toy-list";
+@import "cmps/toy-preview";
 
-@import "cmps/shopping-cart.css";
-@import "cmps/home-page.css";
-@import "cmps/toy-index.css";
-@import "cmps/dashboard.css";
-@import "cmps/about-us.css";
+@import "cmps/shopping-cart";
+@import "cmps/home-page";
+@import "cmps/toy-index";
+@import "cmps/dashboard";
+@import "cmps/about-us";
 
 
 
