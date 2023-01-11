@@ -1,6 +1,5 @@
-// const Router = ReactRouterDOM.HashRouter
-// const { Route, Routes } = ReactRouterDOM
-// const { Provider } = ReactRedux
+
+
 import './assets/styles/css/main.css'
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
