@@ -1,31 +1,29 @@
 /* Setup */
-@import "setup/_vars";
-@import "setup/_typography";
+@import "setup/vars";
+@import "setup/typography";
+@import "setup/functions";
+@import "setup/mixins";
 
 /* Base */
-@import "base/_base";
-@import "base/_helpers";
-@import "base/_layout";
-@import "base/_forms";
+@import "base/base";
+@import "base/helpers";
+@import "base/layout";
+@import "base/forms";
 
 /* Components */
-@import "cmps/_app-header";
-@import "cmps/_toggle-btn";
-@import "cmps/_user-msg";
+@import "cmps/app-header";
+@import "cmps/toggle-btn";
+@import "cmps/user-msg";
 
-@import "cmps/_toy-filter";
-@import "cmps/_toy-list";
-@import "cmps/_toy-preview";
+@import "cmps/toy-filter";
+@import "cmps/toy-list";
+@import "cmps/toy-preview";
 
-@import "cmps/_shopping-cart";
-@import "cmps/_home-page";
-@import "cmps/_toy-index";
-@import "cmps/_dashboard";
-@import "cmps/_about-us";
-
-
-
-
+@import "cmps/shopping-cart";
+@import "cmps/home-page";
+@import "cmps/toy-index";
+@import "cmps/dashboard";
+@import "cmps/about-us";
 
 .popup-menu {
     width: 300px;

@@ -4,13 +4,21 @@ button {
     margin: 0.5em;
     border: 0;
     padding: 0.5em 0.8em;
-    border-radius: 4px;   
+    border-radius: 4px;
+    background-color: #86c232;
+    color: white;
+    font-size: 1rem;
+    border-radius: 2rem;
+    padding: 10px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1294117647);
+    box-shadow: 0 0 4px rgb(0 0 0 / 6%);
+    margin: 10px;
 }
 
 button:hover {
     background-color: var(--clr2);
-    color: white;
-    transition: .3s;
+    color: black;
+    transition: 0.3s;
 }
 
 button[disabled] {

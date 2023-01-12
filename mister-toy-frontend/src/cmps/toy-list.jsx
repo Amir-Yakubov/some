@@ -8,15 +8,11 @@ export function ToyList({ toys, onRemoveToy, onEditToy, addToCart }) {
                 <ToyPreview toy={toy} />
 
                 <div>
-                    <button onClick={() => { onRemoveToy(toy._id) }}>x</button>
-                    {/* <button onClick={() => { onEditToy(toy) }}>Change price</button> */}
+                    <button className="remove-btn" onClick={() => { onRemoveToy(toy._id) }}>x</button>
                     <Link className="toy-preview-link" to={`/toy/edit/${toy._id}`}>Edit </Link> |
                     <Link className="toy-preview-link" to={`/toy/${toy._id}`}> Details</Link>
                 </div>
 
-                {/* <button className="buy" onClick={() => { addToCart(toy) }}>
-                    Add to Cart
-                </button> */}
             </li>)}
     </ul>
 }

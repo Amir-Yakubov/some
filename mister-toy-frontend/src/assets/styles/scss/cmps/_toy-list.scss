@@ -1,15 +1,30 @@
 .toy-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+    padding-inline-start: 0;
+    display: grid;
+    margin: 0;
+    grid-template-columns:
+        minmax(auto, 300px)
+        minmax(auto, 300px)
+        minmax(auto, 300px);
 }
 
 .toy-list li {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: #86c232;
-    margin: 1em;
+    background-color: #86c23212;
+    margin: 10px;
+    margin-right: 10px;
     border-radius: 1rem;
-    padding: 30px;
+    padding: 10px;
+    border: 1px solid #00000024;
+    box-shadow: 0 0 10px #00000021;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: darkred;
+    color: white;
 }

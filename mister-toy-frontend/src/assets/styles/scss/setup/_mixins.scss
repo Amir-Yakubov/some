@@ -1,0 +1,75 @@
+/* Media queries Breakpoint mixins */
+
+@mixin for-mobile-layout {
+  @media (max-width: $padded-break-narrow) {
+    @content;
+  }
+}
+
+@mixin for-narrow-layout {
+  @media (min-width: $padded-break-narrow) {
+    @content;
+  }
+}
+
+@mixin for-normal-layout {
+  @media (min-width: $padded-break-normal) {
+    @content;
+  }
+}
+
+@mixin for-wide-layout {
+  @media (min-width: $padded-break-wide) {
+    @content;
+  }
+}
+
+/* Media  Mixins */
+
+//aspect ratio mixin
+@mixin aspect-ratio($width: 1, $height: 1) {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  >* {
+    position: absolute;
+    inset: 0;
+  }
+
+  >img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Mixin for removing hover efects on iphone screen
+@mixin hover-supported {
+  @media not all and (pointer: coarse) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+
+@mixin blockBtn($bgColor: gray, $color: white) {
+  display: inline-block;
+  border: 1px solid $clr1;
+  padding: 16px 32px;
+  background-color: $bgColor;
+  color: $color;
+}
+
+@mixin gtcMainLayout($width) {
+  grid-template-columns: 
+        minmax($layoutPadding, 1fr) 
+        minmax(auto, $width) 
+        minmax($layoutPadding, 1fr);
+}

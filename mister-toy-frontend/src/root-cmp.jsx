@@ -14,18 +14,16 @@ import { ToyEdit } from './pages/toy-edit';
 import { ToyDetalis } from './pages/toy-details';
 import { Dashboard } from './pages/dashboard';
 
-
-
 export function App() {
 
     return (
         <Provider store={store}>
             <Router>
-                <section className="main-layout app">
-                    <div className="header-wrap">
-                        <AppHeader />
-                    </div>
-                    <main className="main-container">
+                <section className="app main-layout">
+
+                    <AppHeader />
+
+                    <main className="app-main-container">
                         <Routes>
                             <Route element={<HomePage />} path="/" />
                             <Route element={<AboutUs />} path="/about" />

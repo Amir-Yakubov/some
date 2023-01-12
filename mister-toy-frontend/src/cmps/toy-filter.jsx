@@ -4,7 +4,6 @@ import { toyService } from "../services/toy.service.js"
 import { utilService } from "../services/util.service.js"
 import { LabelSelect } from "./label-select.jsx"
 
-
 export function ToyFilter({ onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState(toyService.getDefaultFilter())
@@ -43,11 +42,13 @@ export function ToyFilter({ onSetFilter }) {
     }
 
 
-    return <section className="toy-filter full main-layout">
+
+    return <section className="toy-filter side-bar">
         <form onSubmit={onSubmitFilter}>
             <h2>Toys Filter</h2>
             <label htmlFor="name">name</label>
             <input type="text"
+                className="filter-input"
                 id="name"
                 name="txt"
                 placeholder="By name"
@@ -58,6 +59,7 @@ export function ToyFilter({ onSetFilter }) {
 
             <label htmlFor="maxPrice">Max price</label>
             <input type="number"
+                className="filter-input"
                 id="maxPrice"
                 name="maxPrice"
                 placeholder="By max price"

@@ -1,9 +1,21 @@
-.main-app-title{
+.main-app-title {
     text-align: center;
     font-size: 2rem;
     padding: 1rem;
+    grid-column: 1 /-1;
 }
 
-.header-wrap{
-    /* max-width: 1380px; */
+.add-toy-btn {
+    background-color: #86c232;
+    color: white;
+    font-size: 1rem;
+    border-radius: 2rem;
+    padding: 10px 15px;
+    border: 1px solid #00000021;
+    box-shadow: 0 0 4px #0000000f;
+    margin: 10px;
+}
+
+.add-toy-btn:hover {
+background-color: #c0f86c;
 }
