@@ -15,19 +15,17 @@ export function LabelChart() {
         onLoadToys()
     }, [])
 
-    function onLoadToys() {
-        loadToys()
-            .then(() => {
-                showSuccessMsg('Toys loaded')
-            })
-            .catch(err => {
-                showErrorMsg('Cannot load toys')
-            })
+    async function onLoadToys() {
+        try {
+            await loadToys()
+            showSuccessMsg('Toys loaded')
+        } catch (err) {
+            showErrorMsg('Cannot load toys')
+        }
     }
 
     console.log('Before return toys', toys)
     getLabels()
-
 
     function getLabels() {
         if (!toys) return

@@ -20,7 +20,7 @@ export function ToyEdit() {
         onLoadToy()
     }, [])
 
-    function onLoadToy() {
+    function onLoadToy1() {
         if (!toyId) return
         loadToy(toyId)
             .then((toy) => {
@@ -31,6 +31,16 @@ export function ToyEdit() {
             })
     }
 
+    async function onLoadToy() {
+        if (!toyId) return
+        try {
+            const toy = await loadToy(toyId)
+            showSuccessMsg(`${toy.name} loaded`)
+        } catch (err) {
+            showErrorMsg('Cannot load toy', err)
+        }
+    }
+
     function handleChange({ target }) {
         let { value, type, name: field } = target
         value = type === 'number' ? +value : value
@@ -38,19 +48,20 @@ export function ToyEdit() {
         dispatch({ type: SET_TOY, toy })
     }
 
-    function onSaveToy(ev) {
+    async function onSaveToy(ev) {
         ev.preventDefault()
-        saveToy(toy).then(() => {
+        try {
+            await saveToy(toy)
             resetToy()
             navigate('/toy')
-        })
+        } catch (err) {
+            showErrorMsg('Cannot save toy', err)
+        }
     }
 
     return (
         <section className="toy-edit">
             <h2>{toy._id ? 'Edit this toy' : 'Add a new toy'}</h2>
-
-            {/* <MyForm /> */}
 
             <form onSubmit={onSaveToy}>
                 <label htmlFor="name">Name </label>

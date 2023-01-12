@@ -22,7 +22,7 @@ export function ToyIndex() {
         onLoadToys()
     }, [])
 
-    function onLoadToys(filterBy) {
+    function onLoadToys1(filterBy) {
         loadToys(filterBy)
             .then(() => {
                 showSuccessMsg('Toys loaded')
@@ -32,7 +32,17 @@ export function ToyIndex() {
             })
     }
 
-    function onRemoveToy(toyId) {
+    async function onLoadToys(filterBy) {
+        try {
+            await loadToys(filterBy)
+            showSuccessMsg('Toys loaded')
+
+        } catch (err) {
+            showErrorMsg('Cannot load toys')
+        }
+    }
+
+    function onRemoveToy1(toyId) {
         removeToy(toyId)
             .then(() => {
                 showSuccessMsg('Toy removed')
@@ -40,6 +50,15 @@ export function ToyIndex() {
             .catch(err => {
                 showErrorMsg('Cannot remove toy')
             })
+    }
+
+    async function onRemoveToy(toyId) {
+        try {
+            await removeToy(toyId)
+            showSuccessMsg('Toy removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove toy')
+        }
     }
 
     function onAddToy() {
@@ -53,7 +72,7 @@ export function ToyIndex() {
             })
     }
 
-    function onEditToy(toy) {
+    function onEditToy1(toy) {
         const price = +prompt('New price?')
         const toyToSave = { ...toy, price }
 
@@ -66,6 +85,17 @@ export function ToyIndex() {
             })
     }
 
+    async function onEditToy(toy) {
+        const price = +prompt('New price?')
+        const toyToSave = { ...toy, price }
+        try {
+            const savedToy = await saveToy(toyToSave)
+            showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
+        } catch (err) {
+            showErrorMsg('Cannot update toy')
+        }
+    }
+
     function addToCart(toy) {
         console.log(`Adding ${toy.name} to Cart`)
         dispatch({ type: ADD_TO_CART, toy })
@@ -75,12 +105,11 @@ export function ToyIndex() {
     function setFilter(filterBy) {
         console.log('setFilter', filterBy)
         onLoadToys(filterBy)
-
     }
 
     return <section className='main-container'>
-            <ToyFilter onSetFilter={setFilter} />
-            <h3 className='main-app-title'>TEDS Toys shop</h3>
+        <ToyFilter onSetFilter={setFilter} />
+        <h3 className='main-app-title'>TEDS Toys shop</h3>
         <main>
             {isLoading && <p>Loading...</p>}
             <button className='add-toy-btn' ><Link to={`/toy/edit`}>Add Toy</Link></button>

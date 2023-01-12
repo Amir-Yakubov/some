@@ -18,7 +18,7 @@ export function ToyDetalis() {
         onLoadToy()
     }, [])
 
-    function onLoadToy() {
+    function onLoadToy1() {
         loadToy(toyId)
             .then((toy) => {
                 showSuccessMsg(`${toy.name} loaded`)
@@ -28,8 +28,17 @@ export function ToyDetalis() {
             })
     }
 
+    async function onLoadToy() {
+        try {
+            const toy = await loadToy(toyId)
+            showSuccessMsg(`${toy.name} loaded`)
+        } catch (err) {
+            showErrorMsg('Cannot load toy')
+        }
+    }
+
     function resetToy() {
-        dispatch({ type: RESET_TOY})
+        dispatch({ type: RESET_TOY })
         navigate('/toy')
     }
 

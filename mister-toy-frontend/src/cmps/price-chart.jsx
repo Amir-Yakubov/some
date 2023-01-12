@@ -18,7 +18,7 @@ export function PriceChart() {
         onLoadToys()
     }, [])
 
-    function onLoadToys() {
+    function onLoadToys1() {
         loadToys()
             .then(() => {
                 showSuccessMsg('Toys loaded')
@@ -26,6 +26,15 @@ export function PriceChart() {
             .catch(err => {
                 showErrorMsg('Cannot load toys')
             })
+    }
+
+    async function onLoadToys() {
+        try {
+            await loadToys()
+            showSuccessMsg('Toys loaded')
+        } catch (err) {
+            showErrorMsg('Cannot load toys')
+        }
     }
 
     console.log('Before return toys', toys)

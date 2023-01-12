@@ -23,16 +23,15 @@ export function LoginSignup({ setUser }) {
         setCredentials((prevCreds) => ({ ...prevCreds, [field]: value }))
     }
 
-    function onSubmit(ev) {
+    async function onSubmit(ev) {
         ev.preventDefault()
         const func = isSignupState ? signup : login
-        return func(credentials)
-            .then((user) => {
-                showSuccessMsg(`Welcome ${user.fullname}`)
-            })
-            .catch(err => {
-                showErrorMsg('OOps try again')
-            })
+        try {
+            const user = await func(credentials)
+            showSuccessMsg(`Welcome ${user.fullname}`)
+        } catch (err) {
+            showErrorMsg('OOps try again')
+        }
     }
 
     function onToggleSignupState() {

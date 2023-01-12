@@ -41,8 +41,6 @@ export function ToyFilter({ onSetFilter }) {
         }))
     }
 
-
-
     return <section className="toy-filter side-bar">
         <form onSubmit={onSubmitFilter}>
             <h2>Toys Filter</h2>
