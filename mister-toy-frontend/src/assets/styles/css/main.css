@@ -280,6 +280,9 @@ input:focus {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1490196078);
   width: 100%;
 }
+.toy-filter .checkbox {
+  width: 40px;
+}
 .toy-filter h3 {
   font-size: 1.17rem;
   font-weight: normal;

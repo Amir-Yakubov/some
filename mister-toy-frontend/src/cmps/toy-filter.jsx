@@ -76,7 +76,7 @@ export function ToyFilter({ onSetFilter }) {
 
             <label htmlFor="inStock">In stock</label>
             <input type="checkbox"
-                className="filter-input"
+                className="filter-input checkbox"
                 id="inStock"
                 name="inStock"
                 checked={filterByToEdit.inStock}

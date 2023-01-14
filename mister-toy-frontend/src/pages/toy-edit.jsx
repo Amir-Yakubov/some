@@ -79,7 +79,16 @@ export function ToyEdit() {
                                 />
                             </label>
 
+                            {/* {errors.name && touched.name ? (<span>{errors.name}</span>) : null} */}
+                            <label htmlFor="desc">Description
+                                <Field name="desc"
+                                    id="desc"
+                                    placeholder="Toy's description"
+                                />
+                            </label>
+
                             {errors.name && touched.name ? (<span>{errors.name}</span>) : null}
+                            {/* {errors.desc && touched.desc ? (<span>{errors.desc}</span>) : null} */}
                             <label htmlFor="price">Price
                                 <Field name="price"
                                     id="price"
