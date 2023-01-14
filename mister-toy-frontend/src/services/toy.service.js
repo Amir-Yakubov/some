@@ -36,7 +36,7 @@ function save(toy) {
         console.log('toy FROM TOY SERVICE PUT', toy)
         return httpService.put(BASE_URL + toy._id, toy)
     } else {
-        // toy.owner = userService.getLoggedinUser()
+        toy.owner = userService.getLoggedinUser()
         console.log('toy FROM TOY SERVICE POST', toy)
         return httpService.post(BASE_URL, toy)
     }

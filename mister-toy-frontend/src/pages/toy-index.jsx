@@ -13,9 +13,9 @@ export function ToyIndex() {
 
     const toys = useSelector((storeState) => storeState.toyModule.toys)
     const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
-    // const shoppingCart = useSelector((storeState) => storeState.toyModule.shoppingCart)
+    const shoppingCart = useSelector((storeState) => storeState.toyModule.shoppingCart)
     const dispatch = useDispatch()
-    console.log({render:"render"});
+
     useEffect(() => {
          onLoadToys()
     }, [])
@@ -24,7 +24,6 @@ export function ToyIndex() {
         try {
             loadToys(filterBy)
             showSuccessMsg('Toys loaded')
-
         } catch (err) {
             showErrorMsg('Cannot load toys')
         }
@@ -75,11 +74,4 @@ export function ToyIndex() {
             />
         </main>
     </section>
-
-
-}
-
-
-const Text = () => {
-    return <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, eum!</span>
 }

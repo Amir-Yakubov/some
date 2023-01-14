@@ -13,6 +13,7 @@ import { ToyIndex } from './pages/toy-index';
 import { ToyEdit } from './pages/toy-edit';
 import { ToyDetalis } from './pages/toy-details';
 import { Dashboard } from './pages/dashboard';
+import { UserProfile } from './pages/user-profile';
 
 export function App() {
 
@@ -28,6 +29,7 @@ export function App() {
                             <Route element={<HomePage />} path="/" />
                             <Route element={<AboutUs />} path="/about" />
                             <Route element={<ToyIndex />} path="/toy" />
+                            <Route element={<UserProfile />} path='/user' />
                             <Route element={<ToyEdit />} path="/toy/edit" />
                             <Route element={<ToyEdit />} path="/toy/edit/:toyId" />
                             <Route element={<ToyDetalis />} path="/toy/:toyId" />
