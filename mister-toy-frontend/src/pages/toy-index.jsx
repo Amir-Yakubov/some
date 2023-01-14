@@ -17,9 +17,9 @@ export function ToyIndex() {
     const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
     // const shoppingCart = useSelector((storeState) => storeState.toyModule.shoppingCart)
     const dispatch = useDispatch()
-
+    console.log({render:"render"});
     useEffect(() => {
-        onLoadToys()
+         onLoadToys()
     }, [])
 
     function onLoadToys1(filterBy) {
@@ -34,7 +34,7 @@ export function ToyIndex() {
 
     async function onLoadToys(filterBy) {
         try {
-            await loadToys(filterBy)
+            loadToys(filterBy)
             showSuccessMsg('Toys loaded')
 
         } catch (err) {

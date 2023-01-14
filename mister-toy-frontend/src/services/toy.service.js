@@ -33,9 +33,11 @@ function remove(toyId) {
 
 function save(toy) {
     if (toy._id) {
-        return httpService.put(BASE_URL, toy)
+        console.log('toy FROM TOY SERVICE PUT', toy)
+        return httpService.put(BASE_URL + toy._id, toy)
     } else {
-        toy.owner = userService.getLoggedinUser()
+        // toy.owner = userService.getLoggedinUser()
+        console.log('toy FROM TOY SERVICE POST', toy)
         return httpService.post(BASE_URL, toy)
     }
 }
@@ -45,9 +47,13 @@ function getDefaultFilter() {
 }
 function getEmptyToy() {
     return {
-        name: '',
-        price: 0,
-        _id: ''
+        name: "",
+        desc: "",
+        price: '',
+        labels: [],
+        createdAt: 0,
+        inStock: true,
+        imgUrl: "new.jpg"
     }
 }
 
@@ -57,20 +63,5 @@ function getRandomToy() {
         price: utilService.getRandomIntInclusive(100, 500),
     }
 }
-
-
-// function query(filterBy = getDefaultFilter()) {
-//     return storageService.query(STORAGE_KEY)
-//         .then(toys => {
-//             if (filterBy.txt) {
-//                 const regex = new RegExp(filterBy.txt, 'i')
-//                 toys = toys.filter(toy => regex.test(toy.name))
-//             }
-//             if (filterBy.maxPrice) {
-//                 toys = toys.filter(toy => toy.price <= filterBy.maxPrice)
-//             }
-//             return toys
-//         })
-// }
 
 

@@ -146,7 +146,7 @@ a.active {
 
 .main-container {
   display: grid;
-  grid-template-columns: minmax(auto, 200px) minmax(auto, 1100px);
+  grid-template-columns: minmax(auto, 300px) minmax(auto, 1100px);
 }
 .main-container > * {
   grid-column: 2/-1;
@@ -309,7 +309,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-color: rgba(134, 194, 50, 0.0705882353);
+  background-color: rgb(255, 255, 255);
   margin: 10px;
   margin-right: 10px;
   border-radius: 1rem;
@@ -335,6 +335,10 @@ label {
   display: flex;
   flex-direction: column;
 }
+.toy-preview article h4 {
+  text-align: left;
+  padding-left: 10px;
+}
 
 .toy-preview h4 {
   text-transform: capitalize;
@@ -343,6 +347,10 @@ label {
 
 .toy-preview img {
   max-width: 100px;
+}
+
+.preview-price {
+  display: block;
 }
 
 .cart {

@@ -1,82 +1,113 @@
 
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { MyForm } from '../cmps/my-form.jsx'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { toyService } from '../services/toy.service.js'
-import { store } from '../store/store.js'
-import { loadToy, saveToy, resetToy } from '../store/toy.action.js'
-import { SET_TOY } from '../store/toy.reducer.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+
+
+import { Field, Form, Formik } from "formik"
+import * as Yup from 'yup'
+import { saveToy } from '../store/toy.action.js'
 
 export function ToyEdit() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+
+    const [toy, setToy] = useState(toyService.getEmptyToy())
     const { toyId } = useParams()
 
-    let toy = useSelector((storeState) => storeState.toyModule.toy)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        onLoadToy()
+        if (!toyId) return
+        loadToy()
     }, [])
 
-    function onLoadToy1() {
-        if (!toyId) return
-        loadToy(toyId)
-            .then((toy) => {
-                showSuccessMsg(`${toy.name} loaded`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot load toy', err)
-            })
-    }
 
-    async function onLoadToy() {
-        if (!toyId) return
+    async function loadToy() {
         try {
-            const toy = await loadToy(toyId)
-            showSuccessMsg(`${toy.name} loaded`)
+            const toy = await toyService.getById(toyId)
+            setToy(toy)
+            showSuccessMsg('load toy successfully')
         } catch (err) {
             showErrorMsg('Cannot load toy', err)
         }
     }
 
-    function handleChange({ target }) {
-        let { value, type, name: field } = target
-        value = type === 'number' ? +value : value
-        toy = { ...toy, [field]: value }
-        dispatch({ type: SET_TOY, toy })
-    }
-
-    async function onSaveToy(ev) {
-        ev.preventDefault()
+    async function onSubmit(values) {
         try {
-            await saveToy(toy)
-            resetToy()
+            if (!values.createdAt) values.createdAt = Date.now()
+            console.log(values)
+            await saveToy(values)
             navigate('/toy')
         } catch (err) {
             showErrorMsg('Cannot save toy', err)
         }
     }
 
-    return (
-        <section className="toy-edit">
-            <h2>{toy._id ? 'Edit this toy' : 'Add a new toy'}</h2>
+    const editSchema = Yup.object().shape({
+        name: Yup.string()
+            .min(2, 'Too Short!')
+            .max(20, 'Too Long!')
+            .required('Required'),
+        price: Yup.number()
+            .min(1, 'Too Short!')
+            .max(5000, 'Too Long!')
+            .positive()
+            .required('Required'),
+        // inStock: Yup.boolean()
+    })
 
-            <form onSubmit={onSaveToy}>
-                <label htmlFor="name">Name </label>
-                <input type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Enter name..."
-                    value={toy.name}
-                    onChange={handleChange}
-                />
-                <div>
-                    <button>{toy._id ? 'Save' : 'Add'}</button>
-                    <button onClick={() => resetToy()}><Link to="/toy" >Cancel</Link></button>
-                </div>
-            </form>
-        </section>
+    return (
+        <>
+            <section className="screen" onClick={() => navigate('/toy')}></section>
+            <section className="toy-edit">
+
+                <h2>Edit</h2>
+                <Formik
+                    initialValues={{ ...toy }}
+                    enableReinitialize
+                    validationSchema={editSchema}
+                    onSubmit={onSubmit}>
+                    {({ errors, touched }) => (
+
+                        <Form className='formik grid'>
+
+                            <label htmlFor="name">Name
+                                <Field name="name"
+                                    id="name"
+                                    placeholder="Toy's name"
+                                />
+                            </label>
+
+                            {errors.name && touched.name ? (<span>{errors.name}</span>) : null}
+                            <label htmlFor="price">Price
+                                <Field name="price"
+                                    id="price"
+                                    type="number"
+                                    placeholder="Toy's price"
+                                />
+                            </label>
+
+                            {errors.labels && touched.labels ? (<span>{errors.labels}</span>) : null}
+                            <label>Labels
+                                <Field name="labels[0]" />
+                                <Field name="labels[1]" />
+                            </label>
+
+                            {errors.price && touched.price ? (<span>{errors.price}</span>) : null}
+                            <label htmlFor="inStock">In stock
+                                <Field name="inStock"
+                                    id="inStock"
+                                    type="checkbox"
+                                />
+                            </label>
+                            {errors.inStock && touched.inStock ? <span>{errors.inStock}</span> : null}
+                            <button className="btn" type="submit">Save</button>
+                            <Link to={'/toy'}>Back</Link>
+                        </Form>
+                    )}
+                </Formik>
+            </section>
+        </>
     )
 }

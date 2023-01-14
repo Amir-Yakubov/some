@@ -25,6 +25,8 @@ export const httpService = {
 }
 
 async function ajax(endpoint, method = 'GET', data = null) {
+    console.log('data from HTTP SERVICE', data);
+    console.log('endpoint from HTTP SERVICE', endpoint);
     try {
         const res = await axios({
             url: `${BASE_URL}${endpoint}`,

@@ -44,6 +44,7 @@ async function addToy(req, res) {
 
 
 async function updateToy(req, res) {
+  console.log('GET HEREEE!!!!')
   try {
     const toy = req.body
     const updatedToy = await toyService.update(toy)

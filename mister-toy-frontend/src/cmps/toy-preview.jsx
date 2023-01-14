@@ -9,7 +9,7 @@ export function ToyPreview({ toy }) {
         <article>
             <h4>{toy.name}</h4>
             <img src={require(`../assets/img/${imgUrl}`)} />
-            <p>Price: <span>${toy.price}</span></p>
+            <span className="preview-price">${toy.price}</span>
         </article>
     )
 }
