@@ -27,19 +27,26 @@ export function ToyFilter({ onSetFilter }) {
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
+    function handleCheckbox({ target }) {
+        const { checked } = target
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, inStock: checked }))
+    }
+
+    function onLabelChange(selectedLabels) {
+        console.log('selectedLabels', selectedLabels)
+        setFilterByToEdit((prevFilter) => ({
+            ...prevFilter,
+            labels: selectedLabels,
+        }))
+    }
+
     function onSubmitFilter(ev) {
         // update father cmp that filters change on submit
         ev.preventDefault()
         onSetFilter(filterByToEdit)
     }
 
-    function onLabelChange(selectedLabels) {
-        console.log('filterByToEdit', filterByToEdit)
-        setFilterByToEdit((prevFilter) => ({
-            ...prevFilter,
-            labels: selectedLabels,
-        }))
-    }
+
 
     return <section className="toy-filter side-bar">
         <form onSubmit={onSubmitFilter}>
@@ -66,6 +73,15 @@ export function ToyFilter({ onSetFilter }) {
             />
 
             <LabelSelect onLabelChange={onLabelChange} />
+
+            <label htmlFor="inStock">In stock</label>
+            <input type="checkbox"
+                className="filter-input"
+                id="inStock"
+                name="inStock"
+                checked={filterByToEdit.inStock}
+                onChange={handleCheckbox}
+            />
 
             <button hidden>Filter</button>
         </form>

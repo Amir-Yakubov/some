@@ -10,11 +10,15 @@ export function LabelSelect({ onLabelChange }) {
         { value: 'Battery Powered', label: 'Battery Powered' },
         { value: 'Baby', label: 'Baby' },
         { value: 'outdoor', label: 'outdoor' },
-        { value: 'On wheels', label: 'On wheels' },
-        { value: 'Box game', label: 'Box game' },
-        { value: 'Thinking game', label: 'Thinking game' }
+        { value: 'Lego', label: 'Lego' },
+        { value: 'Board games', label: 'Board games' },
+        { value: 'Minnie Mouse', label: 'Minnie Mouse' },
+        { value: 'Marvel', label: 'Marvel' },
+        { value: 'Action Figure', label: 'Action Figure' },
+        { value: 'Super Mario', label: 'Super Mario' },
+        { value: 'Video game', label: 'Video game' },
+        { value: 'With Sound', label: 'With Sound' }
     ]
-
 
     function handleChange(...props) {
         // let { value, name: field, type } = target

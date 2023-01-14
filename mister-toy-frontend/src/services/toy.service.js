@@ -18,7 +18,7 @@ export const toyService = {
 }
 
 function query(filterBy = getDefaultFilter()) {
-    const queryParams = `?name=${filterBy.txt}&maxPrice=${filterBy.maxPrice}&labels=${filterBy.labels}`
+    const queryParams = `?name=${filterBy.txt}&maxPrice=${filterBy.maxPrice}&labels=${filterBy.labels}&inStock=${filterBy.inStock}`
     return httpService.get(BASE_URL + queryParams)
 }
 
@@ -43,7 +43,7 @@ function save(toy) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '', labels: [] }
+    return { txt: '', maxPrice: '', labels: [], inStock: true }
 }
 function getEmptyToy() {
     return {

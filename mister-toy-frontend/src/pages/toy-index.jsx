@@ -9,8 +9,6 @@ import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
 import { ADD_TO_CART } from '../store/toy.reducer.js'
 import { useEffect } from 'react'
 
-// import { PopupMenu } from '../cmps/popup-menu.jsx'
-
 export function ToyIndex() {
 
     const toys = useSelector((storeState) => storeState.toyModule.toys)
@@ -22,16 +20,6 @@ export function ToyIndex() {
          onLoadToys()
     }, [])
 
-    function onLoadToys1(filterBy) {
-        loadToys(filterBy)
-            .then(() => {
-                showSuccessMsg('Toys loaded')
-            })
-            .catch(err => {
-                showErrorMsg('Cannot load toys')
-            })
-    }
-
     async function onLoadToys(filterBy) {
         try {
             loadToys(filterBy)
@@ -42,16 +30,6 @@ export function ToyIndex() {
         }
     }
 
-    function onRemoveToy1(toyId) {
-        removeToy(toyId)
-            .then(() => {
-                showSuccessMsg('Toy removed')
-            })
-            .catch(err => {
-                showErrorMsg('Cannot remove toy')
-            })
-    }
-
     async function onRemoveToy(toyId) {
         try {
             await removeToy(toyId)
@@ -59,30 +37,6 @@ export function ToyIndex() {
         } catch (err) {
             showErrorMsg('Cannot remove toy')
         }
-    }
-
-    function onAddToy() {
-        const toyToSave = toyService.getRandomToy()
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy added (id: ${savedToy._id})`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot add toy')
-            })
-    }
-
-    function onEditToy1(toy) {
-        const price = +prompt('New price?')
-        const toyToSave = { ...toy, price }
-
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot update toy')
-            })
     }
 
     async function onEditToy(toy) {

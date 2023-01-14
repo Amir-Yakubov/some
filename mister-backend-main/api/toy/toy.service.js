@@ -3,23 +3,30 @@ const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
-async function query(filterBy = { name: '', maxPrice: 0 }) {
+async function query(filterBy) {
+    if (!filterBy) filterBy = { name: '', maxPrice: 0, labels: ["Outdoor", "Battery Powered"] }
+    if (filterBy.maxPrice === 0) filterBy.maxPrice = 1000
+    if (filterBy.inStock === 'true') filterBy.inStock = true
+    if (filterBy.inStock === 'false') filterBy.inStock = false
+    console.log('filterBy TOY SERVICE', filterBy)
+
     try {
-        if (filterBy.maxPrice === 0) filterBy.maxPrice = 1000
-        console.log(filterBy)
         const criteria = {
             name: { $regex: filterBy.name, $options: 'i' },
-            price: { $lte: +filterBy.maxPrice }
+            price: { $lte: +filterBy.maxPrice },
+            labels: { $in: filterBy.labels },
+            inStock: { $eq: filterBy.inStock }
         }
+        console.log('criteria', criteria)
         const collection = await dbService.getCollection('toy')
         var toys = await collection.find(criteria).toArray()
-        console.log('toys for mongo', toys)
         return toys
     } catch (err) {
         logger.error('cannot find toys', err)
         throw err
     }
 }
+
 
 async function getById(toyId) {
     try {
