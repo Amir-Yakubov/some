@@ -4,26 +4,6 @@ const logger = require('../../services/logger.service')
 
 
 async function getToys(req, res) {
-  const labelOptions = [
-    "Lego",
-    "Board games",
-    "Battery Powered",
-    "Outdoor",
-    "Baby",
-    "Minnie Mouse",
-    "Marvel",
-    "Action Figure",
-    "With Sound",
-    "Video game",
-    "Super Mario",
-    "Doll"
-  ]
-
-  let labelsToFilter = []
-
-  if (req.query.labels) {
-    labelsToFilter = req.query.labels.split(',')
-  } else labelsToFilter = labelOptions
 
   try {
     logger.debug('Getting Toys')
@@ -32,8 +12,8 @@ async function getToys(req, res) {
     const filterBy = {
       name: req.query.name || '',
       maxPrice: req.query.maxPrice || 0,
-      labels: labelsToFilter,
-      inStock: req.query.inStock || true
+      labels: req.query.labels || [],
+      inStock: req.query.inStock || ''
     }
     const toys = await toyService.query(filterBy)
     res.json(toys)

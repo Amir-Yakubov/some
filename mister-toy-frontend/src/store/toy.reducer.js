@@ -21,7 +21,6 @@ const initialState = {
 
 export function toyReducer(state = initialState, action) {
     let toys
-    let toy
     let shoppingCart
     let lastRemovedToy
 

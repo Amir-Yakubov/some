@@ -4,19 +4,10 @@ const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
 async function query(filterBy) {
-    if (!filterBy) filterBy = { name: '', maxPrice: 0, labels: ["Outdoor", "Battery Powered"] }
-    if (filterBy.maxPrice === 0) filterBy.maxPrice = 1000
-    if (filterBy.inStock === 'true') filterBy.inStock = true
-    if (filterBy.inStock === 'false') filterBy.inStock = false
-    console.log('filterBy TOY SERVICE', filterBy)
+    if (!filterBy) filterBy = { name: '', maxPrice: 0, labels: [], inStock: '' }
 
     try {
-        const criteria = {
-            name: { $regex: filterBy.name, $options: 'i' },
-            price: { $lte: +filterBy.maxPrice },
-            labels: { $in: filterBy.labels },
-            inStock: { $eq: filterBy.inStock }
-        }
+        const criteria = _buildCriteria(filterBy)
         console.log('criteria', criteria)
         const collection = await dbService.getCollection('toy')
         var toys = await collection.find(criteria).toArray()
@@ -25,6 +16,32 @@ async function query(filterBy) {
         logger.error('cannot find toys', err)
         throw err
     }
+}
+
+function sortCriteria(filterBy) {
+
+}
+
+function _buildCriteria(filterBy) {
+    console.log('filterBy build criteria', filterBy)
+    let criteria = {}
+    if (filterBy.name) {
+        criteria.name = { $regex: filterBy.name, $options: 'ig' }
+    }
+    if (filterBy.maxPrice) {
+        criteria.price = { $lte: +filterBy.maxPrice }
+    }
+    if (filterBy.labels.length > 0) {
+        criteria.labels = { $all: filterBy.labels.split(',') }
+    }
+    if (filterBy.inStock) {
+        if (filterBy.inStock === 'true') filterBy.inStock = true
+        if (filterBy.inStock === 'false') filterBy.inStock = false
+        criteria.inStock = { $eq: filterBy.inStock }
+        console.log(criteria.inStock)
+    }
+    console.log('criteria to query', criteria)
+    return criteria
 }
 
 
@@ -102,6 +119,8 @@ async function removeToyMsg(toyId, msgId) {
         throw err
     }
 }
+
+
 
 module.exports = {
     remove,

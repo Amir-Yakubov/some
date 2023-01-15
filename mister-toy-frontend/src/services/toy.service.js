@@ -43,7 +43,7 @@ function save(toy) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '', labels: [], inStock: true }
+    return { txt: '', maxPrice: '', labels: [], inStock: '' }
 }
 function getEmptyToy() {
     return {
