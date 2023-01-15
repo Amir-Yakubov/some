@@ -5,6 +5,7 @@ import { logout } from '../store/user.action.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { ReviewApp } from './review-app.jsx'
 
 export function AppHeader() {
 
@@ -37,6 +38,8 @@ export function AppHeader() {
                     <p><span className='logged-in-username'>{user.fullname}</span> {/* <span>${user.score.toLocaleString()}</span> */}</p>
                     <button onClick={onLogout}>Logout</button>
                 </section>}
+
+                {user && <ReviewApp />}
 
                 {!user && <section className="user-info">
                     <LoginSignup setUser={setUser} />
