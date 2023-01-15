@@ -2,16 +2,24 @@ const toyService = require('./toy.service.js')
 
 const logger = require('../../services/logger.service')
 
+module.exports = {
+  getToys,
+  getToyById,
+  addToy,
+  updateToy,
+  removeToy,
+  addToyMsg,
+  removeToyMsg
+}
 
 async function getToys(req, res) {
 
   try {
     logger.debug('Getting Toys')
-    logger.debug(req.query.inStock)
-
     const filterBy = {
       name: req.query.name || '',
       maxPrice: req.query.maxPrice || 0,
+      /* sort: req.query.sortBy || '', */
       labels: req.query.labels || [],
       inStock: req.query.inStock || ''
     }
@@ -50,9 +58,6 @@ async function addToy(req, res) {
 
 
 async function updateToy(req, res) {
-  // if (toy.owner.fullname !== "Guest") {
-  //   if (toy.owner !== loggedinUser) return
-  // }
   try {
     const toy = req.body
     const updatedToy = await toyService.update(toy)
@@ -65,9 +70,6 @@ async function updateToy(req, res) {
 }
 
 async function removeToy(req, res) {
-  // if (toy.owner.fullname !== "Guest") {
-  //   if (toy.owner !== loggedinUser) return
-  // }
   try {
     const toyId = req.params.id
     const removedId = await toyService.remove(toyId)
@@ -110,12 +112,3 @@ async function removeToyMsg(req, res) {
   }
 }
 
-module.exports = {
-  getToys,
-  getToyById,
-  addToy,
-  updateToy,
-  removeToy,
-  addToyMsg,
-  removeToyMsg
-}

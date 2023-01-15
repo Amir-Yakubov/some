@@ -3,12 +3,19 @@ const logger = require('../../services/logger.service')
 const utilService = require('../../services/util.service')
 const ObjectId = require('mongodb').ObjectId
 
-async function query(filterBy) {
-    if (!filterBy) filterBy = { name: '', maxPrice: 0, labels: [], inStock: '' }
+module.exports = {
+    remove,
+    query,
+    getById,
+    add,
+    update,
+    addToyMsg,
+    removeToyMsg
+}
 
+async function query(filterBy = { name: '' }) {
     try {
         const criteria = _buildCriteria(filterBy)
-        console.log('criteria', criteria)
         const collection = await dbService.getCollection('toy')
         var toys = await collection.find(criteria).toArray()
         return toys
@@ -18,12 +25,17 @@ async function query(filterBy) {
     }
 }
 
-function sortCriteria(filterBy) {
-
-}
+// function sortCriteria(filterBy) {
+//     if (filterBy.sortBy === 'createdAt') {
+//         return { 'createdAt': 1 }
+//     }  else if (filterBy.sortBy === 'highPrice') {
+//         return { 'maxPrice': -1 }
+//     } else if (filterBy.sortBy === 'lowPrice') {
+//         return { 'maxPrice': 1 }
+//     }
+// }
 
 function _buildCriteria(filterBy) {
-    console.log('filterBy build criteria', filterBy)
     let criteria = {}
     if (filterBy.name) {
         criteria.name = { $regex: filterBy.name, $options: 'ig' }
@@ -38,12 +50,9 @@ function _buildCriteria(filterBy) {
         if (filterBy.inStock === 'true') filterBy.inStock = true
         if (filterBy.inStock === 'false') filterBy.inStock = false
         criteria.inStock = { $eq: filterBy.inStock }
-        console.log(criteria.inStock)
     }
-    console.log('criteria to query', criteria)
     return criteria
 }
-
 
 async function getById(toyId) {
     try {
@@ -79,7 +88,6 @@ async function add(toy) {
 }
 
 async function update(toy) {
-    console.log('And Here!!!!!!!!!!!!!!');
     try {
         const toyToSave = {
             name: toy.name,
@@ -122,12 +130,4 @@ async function removeToyMsg(toyId, msgId) {
 
 
 
-module.exports = {
-    remove,
-    query,
-    getById,
-    add,
-    update,
-    addToyMsg,
-    removeToyMsg
-}
+

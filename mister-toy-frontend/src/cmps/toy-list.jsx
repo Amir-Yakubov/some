@@ -3,7 +3,7 @@ import { ToyPreview } from "./toy-preview.jsx"
 
 export function ToyList({ toys, onRemoveToy }) {
     console.log(toys)
-    const imgUrl = 'add-toy.svg'
+    const imgUrl = 'add-toy.png'
     return <ul className="toy-list">
         <li className="toy-preview" key={'asdaad123'}>
             <Link to={`/toy/edit`}><img className="add-toy-img" src={require(`../assets/img/${imgUrl}`)} /></Link>

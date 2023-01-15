@@ -15,12 +15,14 @@
 .toy-preview h4 {
     text-transform: capitalize;
     color: black;
-}
-
-.toy-preview img {
-    max-width: 100px;
+    margin-top: 0;
+    width: 83%;
 }
 
 .preview-price {
     display: block;
+}
+
+.add-toy-img{
+    max-width: 100px;
 }

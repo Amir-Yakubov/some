@@ -60,12 +60,15 @@ export function ToyIndex() {
         onLoadToys(filterBy)
     }
 
-    const imgUrl = 'dots-loader.svg'
+    const loaderImg = 'dots-loader.svg'
+    const bannerImg = 'banner.jpg'
+
     return <section className='main-container'>
+            {/* <h3 className='main-app-title'>TEDS Toys shop</h3> */}
         <ToyFilter onSetFilter={setFilter} />
-        <h3 className='main-app-title'>TEDS Toys shop</h3>
+        <img className="banner-img" src={require(`../assets/img/${bannerImg}`)} />
         <main>
-            {isLoading && <img className="loader-img" src={require(`../assets/img/${imgUrl}`)} />}
+            {isLoading && <img className="loader-img" src={require(`../assets/img/${loaderImg}`)} />}
             {/* <button className='add-toy-btn' ><Link to={`/toy/edit`}>Add Toy</Link></button> */}
             <ToyList
                 toys={toys}

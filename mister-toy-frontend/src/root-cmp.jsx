@@ -24,7 +24,7 @@ export function App() {
 
                     <AppHeader />
 
-                    <main className="app-main-container main-layout">
+                    <main className="app-main-container">
                         <Routes>
                             <Route element={<HomePage />} path="/" />
                             <Route element={<AboutUs />} path="/about" />

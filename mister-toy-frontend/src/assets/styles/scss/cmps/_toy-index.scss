@@ -17,5 +17,13 @@
 }
 
 .add-toy-btn:hover {
-background-color: #c0f86c;
+    background-color: #c0f86c;
+}
+
+.banner-img {
+    grid-column: 1/3;
+    height: 349px;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 35px;
 }

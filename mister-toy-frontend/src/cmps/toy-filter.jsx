@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { toyService } from "../services/toy.service.js"
 import { utilService } from "../services/util.service.js"
 import { LabelSelect } from "./label-select.jsx"
+import { SortSelect } from "./sort-select.jsx"
 
 export function ToyFilter({ onSetFilter }) {
 
@@ -40,6 +41,11 @@ export function ToyFilter({ onSetFilter }) {
         }))
     }
 
+    function onSortChange(selectedSort) {
+        console.log('selectedSort', selectedSort)
+        setFilterByToEdit((prevFilter) => ({ ...prevFilter, sortBy: selectedSort }))
+    }
+
     function onSubmitFilter(ev) {
         // update father cmp that filters change on submit
         ev.preventDefault()
@@ -73,6 +79,7 @@ export function ToyFilter({ onSetFilter }) {
             />
 
             <LabelSelect onLabelChange={onLabelChange} />
+            {/* <SortSelect onSortChange={onSortChange} /> */}
 
             <label htmlFor="inStock">In stock</label>
             <input type="checkbox"
