@@ -1,8 +1,8 @@
-import { storageService } from './async-storage.service'
+// import { storageService } from './async-storage.service'
+// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
+// import { showSuccessMsg } from '../services/event-bus.service'
 import { httpService } from './http.service'
 import { store } from '../store/store'
-// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
-import { showSuccessMsg } from '../services/event-bus.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -16,11 +16,11 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
+    changeScore,
+    onUserUpdate
 }
 
 window.userService = userService
-
 
 function getUsers() {
     // return storageService.query('user')
@@ -28,7 +28,7 @@ function getUsers() {
 }
 
 function onUserUpdate(user) {
-    showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
+    // showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
     store.dispatch({ type: 'SET_WATCHED_USER', user })
 }
 
@@ -67,6 +67,7 @@ async function login(userCred) {
         return saveLocalUser(user)
     }
 }
+
 async function signup(userCred) {
     userCred.score = 10000
     if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
@@ -97,6 +98,7 @@ function saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
+    debugger
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 

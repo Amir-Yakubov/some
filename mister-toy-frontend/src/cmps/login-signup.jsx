@@ -7,8 +7,8 @@ import { signup, login } from '../store/user.action.js'
 function getEmptyCredentials() {
     return {
         fullname: '',
-        username: 'admin',
-        password: 'admin',
+        username: 'puki',
+        password: '123',
     }
 }
 

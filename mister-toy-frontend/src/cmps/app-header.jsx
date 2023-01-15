@@ -28,6 +28,8 @@ export function AppHeader() {
         dispatch({ type: TOGGLE_CART_SHOWN })
     }
 
+
+    console.log('!!!!!!!!!!!!!!!!!!!', user)
     return (
         <header className="app-header main-layout full">
             <div className="main-row flex">
@@ -38,7 +40,7 @@ export function AppHeader() {
                     <button onClick={onLogout}>Logout</button>
                 </section>}
 
-                {/* {user && <ReviewApp />} */}
+                {user && <ReviewApp />}
 
                 {!user && <section className="user-info">
                     <LoginSignup setUser={setUser} />
