@@ -30,7 +30,19 @@ export function AppHeader() {
 
     return (
         <header className="app-header main-layout full">
-            <h1>TEDS SHOP</h1>
+            <div className="main-row flex">
+                <h1>TEDS SHOP</h1>
+
+                {user && <section className="user-info">
+                    <p><span className='logged-in-username'>{user.fullname}</span> {/* <span>${user.score.toLocaleString()}</span> */}</p>
+                    <button onClick={onLogout}>Logout</button>
+                </section>}
+
+                {!user && <section className="user-info">
+                    <LoginSignup setUser={setUser} />
+                </section>}
+
+            </div>
             <nav>
                 <NavLink to="/">Home</NavLink> |
                 <NavLink to="/toy"> Toys</NavLink> |
@@ -40,16 +52,6 @@ export function AppHeader() {
                     🛒 Cart
                 </a> */}
             </nav>
-
-            {user && <section className="user-info">
-                <p><span className='logged-in-username'>{user.fullname}</span> {/* <span>${user.score.toLocaleString()}</span> */}</p>
-                <button onClick={onLogout}>Logout</button>
-            </section>}
-
-            {!user && <section className="user-info">
-                <LoginSignup setUser={setUser} />
-            </section>}
-
         </header>
 
 

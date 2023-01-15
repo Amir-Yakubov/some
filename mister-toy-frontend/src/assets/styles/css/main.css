@@ -210,6 +210,10 @@ input:focus {
   color: rgb(81, 81, 81);
 }
 
+.main-row {
+  justify-content: space-between;
+}
+
 .toggle-btn input {
   position: absolute;
   opacity: 0;
@@ -253,7 +257,7 @@ input:focus {
   float: right;
   margin: 0;
   margin-inline-start: 3em;
-  padding: 0 4px;
+  padding: 0 5px;
 }
 
 .toy-filter {
@@ -262,8 +266,7 @@ input:focus {
   border: 1px solid rgba(0, 0, 0, 0.1019607843);
   padding: 1rem;
   border-radius: 1rem;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin: 10px 10px 10px 0;
 }
 .toy-filter .filter-input {
   min-height: 38px;
@@ -281,6 +284,9 @@ input:focus {
 }
 .toy-filter .checkbox {
   width: 40px;
+}
+.toy-filter h2 {
+  margin-top: 0;
 }
 .toy-filter h3 {
   font-size: 1.17rem;
@@ -304,7 +310,7 @@ label {
   padding-inline-start: 0;
   display: grid;
   margin: 0;
-  grid-template-columns: minmax(auto, 300px) minmax(auto, 300px) minmax(auto, 300px);
+  grid-template-columns: minmax(auto, 250px) minmax(auto, 250px) minmax(auto, 250px) minmax(auto, 250px);
 }
 
 .toy-list li {
