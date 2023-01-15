@@ -3,9 +3,10 @@ import { ToyPreview } from "./toy-preview.jsx"
 
 export function ToyList({ toys, onRemoveToy }) {
     console.log(toys)
+    const imgUrl = 'add-toy.svg'
     return <ul className="toy-list">
         <li className="toy-preview" key={'asdaad123'}>
-            <button className='add-toy-btn' ><Link to={`/toy/edit`}>Add Toy</Link></button>
+            <Link to={`/toy/edit`}><img className="add-toy-img" src={require(`../assets/img/${imgUrl}`)} /></Link>
         </li>
         {toys.map(toy =>
             <li className="toy-preview" key={toy._id}>

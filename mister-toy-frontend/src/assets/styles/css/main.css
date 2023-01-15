@@ -239,28 +239,21 @@ input:focus {
 }
 
 .user-msg {
-  background-color: lightgray;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.186);
   padding: 0.2em 0.5em;
   position: fixed;
   bottom: 0;
   right: 1em;
-  color: white;
+  color: black;
   border-radius: 2px;
 }
 
-.user-msg.success {
-  background-color: black;
-}
-
-.user-msg.error {
-  background-color: black;
-}
-
 .user-msg button {
-  font-size: 0.5em;
   float: right;
   margin: 0;
   margin-inline-start: 3em;
+  padding: 0 4px;
 }
 
 .toy-filter {
