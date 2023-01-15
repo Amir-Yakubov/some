@@ -6,7 +6,6 @@ module.exports = {
     signup,
     logout
 }
-
 async function login(req, res) {
     const { username, password } = req.body
     try {
