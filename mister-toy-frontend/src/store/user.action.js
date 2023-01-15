@@ -4,7 +4,7 @@ import { CLEAR_CART, SET_USER, UPDATE_USER_SCORE, UPDATE_USER } from '../store/u
 
 export async function update(user) {
     try {
-        const user = await userService.update(user)
+        await userService.update(user)
         store.dispatch({ type: UPDATE_USER, user })
         return user
     } catch (err) {

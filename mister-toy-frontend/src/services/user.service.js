@@ -4,7 +4,7 @@ import { httpService } from './http.service.js'
 
 const STORAGE_KEY = 'userDB'
 const STORAGE_KEY_LOGGEDIN = 'loggedinUser'
-const BASE_URL = 'user/'
+const BASE_URL = 'auth/'
 
 export const userService = {
     login,
@@ -35,7 +35,7 @@ async function signup({ username, password, fullname }) {
     const user = { username, password, fullname, score: 10000 }
     try {
         const userToSet = await httpService.post(BASE_URL + 'signup', user)
-        _setLoggedinUser(userToSet)
+        return _setLoggedinUser(userToSet)
     } catch (err) {
         console.log('Could not signup', err)
     }
