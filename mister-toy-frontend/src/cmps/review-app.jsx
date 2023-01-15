@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg, showUserMsg } from '../services/event-bus.service'
 
 import { loadReviews, addReview, removeReview } from '../store/review.actions'
-import { loadUsers } from '../store/user.actions'
+import { loadUsers } from '../store/user.action'
 
 export function ReviewApp() {
 

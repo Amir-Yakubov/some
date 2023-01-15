@@ -1,7 +1,7 @@
 import { showSuccessMsg, /* showErrorMsg */ } from '../services/event-bus.service.js'
 import { userService } from '../services/user.service.js'
 import { REMOVE_FROM_CART } from '../store/toy.reducer.js'
-import { checkout } from '../store/user.action.js'
+// import { checkout } from '../store/user.action.js'
 
 export function ShoppingCart({ cart, dispatch }) {
 
@@ -19,7 +19,7 @@ export function ShoppingCart({ cart, dispatch }) {
 
     function onCheckout() {
         const amount = getCartTotal()
-        checkout(-amount)
+        // checkout(-amount)
             .then(newScore => {
                 showSuccessMsg(`Charged you: $ ${amount.toLocaleString()}`)
             })

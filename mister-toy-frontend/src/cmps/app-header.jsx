@@ -1,11 +1,10 @@
-import { SET_USER } from '../store/user.reducer.js'
 import { TOGGLE_CART_SHOWN } from '../store/toy.reducer.js'
-import { logout } from '../store/user.action.js'
 
 import { LoginSignup } from './login-signup.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { ReviewApp } from './review-app.jsx'
+import { logout } from '../store/user.action.js'
 
 export function AppHeader() {
 
@@ -14,7 +13,7 @@ export function AppHeader() {
     const dispatch = useDispatch()
 
     function setUser(user) {
-        dispatch({ type: SET_USER, user })
+        dispatch({ type: 'SET_USER', user })
     }
 
     function onLogout() {
@@ -39,7 +38,7 @@ export function AppHeader() {
                     <button onClick={onLogout}>Logout</button>
                 </section>}
 
-                {user && <ReviewApp />}
+                {/* {user && <ReviewApp />} */}
 
                 {!user && <section className="user-info">
                     <LoginSignup setUser={setUser} />

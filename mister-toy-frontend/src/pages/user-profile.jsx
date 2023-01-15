@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userService } from "../services/user.service.js"
-import { SET_USER } from "../store/user.reducer.js"
+// import { SET_USER } from "../store/user.reducer.js"
 
 
 export function UserProfile() {
@@ -30,7 +30,7 @@ export function UserProfile() {
         user.fullname = userPref.fullname
         console.log('user.prefs before dispatch', user.prefs)
         userService.updateUser(user)
-        dispatch({ type: SET_USER, user })
+        dispatch({ type: 'SET_USER', user })
     }
 
     function getTime(time) {
