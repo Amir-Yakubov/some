@@ -44,11 +44,11 @@ export function AppHeader() {
 
             </div>
             <nav>
-                <NavLink to="/">Home</NavLink> |
+                <NavLink className="first-a" to="/">Home</NavLink> |
                 <NavLink to="/toy"> Toys</NavLink> |
                 <NavLink to="/dashboard"> Dashboard</NavLink> |
-                <NavLink to="/about"> About</NavLink> |
-                {/* <a href="#" onClick={onToggleCart}>
+                <NavLink to="/about"> About</NavLink>{/*  |
+                <a href="#" onClick={onToggleCart}>
                     🛒 Cart
                 </a> */}
             </nav>

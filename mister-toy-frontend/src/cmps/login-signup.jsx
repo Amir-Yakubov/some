@@ -70,13 +70,15 @@ export function LoginSignup({ setUser }) {
                 required
             />}
 
-            <button>{isSignupState ? 'Signup' : 'Login'}</button>
+            <button className='login-btn'>{isSignupState ? 'Signup' : 'Login'}</button>
+            <button className='signup-btn'>
+                <a href="#" onClick={onToggleSignupState}>
+                    {isSignupState ? 'Login' : 'Signup'}
+                </a >
+            </button>
         </form>
 
         <div className="btns">
-            <a href="#" onClick={onToggleSignupState}>
-                {isSignupState ? 'Already a member? Login' : 'New user? Signup here'}
-            </a >
         </div>
     </div >
 

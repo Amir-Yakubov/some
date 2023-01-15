@@ -19,7 +19,7 @@ export function AppFooter() {
     }
 
     return (
-        <footer>
+        <footer className='main-layout full' >
             <p>Amir Yakubov</p>
             {/* <p>
                 Currently {toysCount} toys in the shop
