@@ -249,11 +249,11 @@ input:focus {
 }
 
 .user-msg.success {
-  background-color: var(--clr1);
+  background-color: black;
 }
 
 .user-msg.error {
-  background-color: var(--clr2);
+  background-color: black;
 }
 
 .user-msg button {
@@ -269,6 +269,8 @@ input:focus {
   border: 1px solid rgba(0, 0, 0, 0.1019607843);
   padding: 1rem;
   border-radius: 1rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .toy-filter .filter-input {
   min-height: 38px;
@@ -384,6 +386,14 @@ label {
   border-radius: 6rem;
   border: 1px solid rgba(0, 0, 0, 0.2196078431);
   background-color: rgba(217, 255, 213, 0.4392156863);
+}
+
+.loader-img {
+  height: 70px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100;
 }
 
 .main-app-title {

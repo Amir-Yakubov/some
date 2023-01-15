@@ -11,3 +11,11 @@
     border: 1px solid #00000038;
     background-color: #d9ffd570;
 }
+
+.loader-img {
+    height: 70px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+}

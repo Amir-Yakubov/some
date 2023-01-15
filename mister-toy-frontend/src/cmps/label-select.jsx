@@ -9,7 +9,7 @@ export function LabelSelect({ onLabelChange }) {
         { value: 'Doll', label: 'Doll', isFixed: true },
         { value: 'Battery Powered', label: 'Battery Powered' },
         { value: 'Baby', label: 'Baby' },
-        { value: 'outdoor', label: 'outdoor' },
+        { value: 'Outdoor', label: 'Outdoor' },
         { value: 'Lego', label: 'Lego' },
         { value: 'Board games', label: 'Board games' },
         { value: 'Minnie Mouse', label: 'Minnie Mouse' },

@@ -62,7 +62,7 @@ export function ToyEdit() {
             <section className="screen" onClick={() => navigate('/toy')}></section>
             <section className="toy-edit">
 
-                <h2>Edit</h2>
+                <h2>{toyId ? 'Edit' : 'Add'}</h2>
                 <Formik
                     initialValues={{ ...toy }}
                     enableReinitialize

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import { ToyList } from '../cmps/toy-list.jsx'
 import { ToyFilter } from '../cmps/toy-filter.jsx'
-import { toyService } from '../services/toy.service.js'
+// import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
 import { ADD_TO_CART } from '../store/toy.reducer.js'
@@ -60,12 +60,13 @@ export function ToyIndex() {
         onLoadToys(filterBy)
     }
 
+    const imgUrl = 'dots-loader.svg'
     return <section className='main-container'>
         <ToyFilter onSetFilter={setFilter} />
         <h3 className='main-app-title'>TEDS Toys shop</h3>
         <main>
-            {isLoading && <p>Loading...</p>}
-            <button className='add-toy-btn' ><Link to={`/toy/edit`}>Add Toy</Link></button>
+            {isLoading && <img className="loader-img" src={require(`../assets/img/${imgUrl}`)} />}
+            {/* <button className='add-toy-btn' ><Link to={`/toy/edit`}>Add Toy</Link></button> */}
             <ToyList
                 toys={toys}
                 onRemoveToy={onRemoveToy}
