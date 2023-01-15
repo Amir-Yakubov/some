@@ -70,7 +70,9 @@ async function addToy(req, res) {
 
 
 async function updateToy(req, res) {
-  console.log('GET HEREEE!!!!')
+  // if (toy.owner.fullname !== "Guest") {
+  //   if (toy.owner !== loggedinUser) return
+  // }
   try {
     const toy = req.body
     const updatedToy = await toyService.update(toy)
@@ -83,6 +85,9 @@ async function updateToy(req, res) {
 }
 
 async function removeToy(req, res) {
+  // if (toy.owner.fullname !== "Guest") {
+  //   if (toy.owner !== loggedinUser) return
+  // }
   try {
     const toyId = req.params.id
     const removedId = await toyService.remove(toyId)

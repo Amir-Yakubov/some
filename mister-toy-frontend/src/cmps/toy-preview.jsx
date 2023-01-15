@@ -4,7 +4,7 @@ export function ToyPreview({ toy }) {
 
 
     const imgUrl = toy.imgUrl
-
+    // console.log('toy from preview', toy)
     return (
         <article>
             <h4>{toy.name}</h4>

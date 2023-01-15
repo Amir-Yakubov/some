@@ -32,7 +32,7 @@
   display: grid;
   grid-template-columns:
     minmax(auto, 300px)
-    minmax(auto, 1100px);
+    minmax(auto, 1000px);
 
   > * {
     grid-column: 2 / -1;

@@ -18,7 +18,6 @@ export async function login(credentials) {
         const user = await userService.login(credentials)
         store.dispatch({ type: SET_USER, user })
         return user
-
     } catch (err) {
         console.error('Cannot login:', err)
         throw err

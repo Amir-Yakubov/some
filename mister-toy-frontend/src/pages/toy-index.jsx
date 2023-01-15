@@ -17,7 +17,7 @@ export function ToyIndex() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-         onLoadToys()
+        onLoadToys()
     }, [])
 
     async function onLoadToys(filterBy) {

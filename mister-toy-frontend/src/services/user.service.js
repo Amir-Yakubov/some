@@ -24,7 +24,7 @@ function getById(userId) {
 async function login(credentials) {
     try {
         const user = await httpService.post(BASE_URL + 'login', credentials)
-        _setLoggedinUser(user)
+        return _setLoggedinUser(user)
     } catch (err) {
         console.log('err:', err)
         throw new Error('Invalid login')

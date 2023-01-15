@@ -20,7 +20,8 @@ export function AppFooter() {
 
     return (
         <footer>
-            <p>
+            <p>Amir Yakubov</p>
+            {/* <p>
                 Currently {toysCount} toys in the shop
             </p>
 
@@ -32,7 +33,7 @@ export function AppFooter() {
                     </a>
                 </p>
             }
-            {isCartShown && <ShoppingCart cart={cart} dispatch={dispatch} />}
+            {isCartShown && <ShoppingCart cart={cart} dispatch={dispatch} />} */}
             <UserMsg />
         </footer>
     )
