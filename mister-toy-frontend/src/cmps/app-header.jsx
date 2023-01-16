@@ -3,8 +3,9 @@ import { TOGGLE_CART_SHOWN } from '../store/toy.reducer.js'
 import { LoginSignup } from './login-signup.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { ReviewApp } from './review-app.jsx'
+// import { ReviewApp } from './review-app.jsx'
 import { logout } from '../store/user.action.js'
+
 
 export function AppHeader() {
 

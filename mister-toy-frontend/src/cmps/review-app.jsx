@@ -8,7 +8,7 @@ import { loadUsers } from '../store/user.action'
 
 export function ReviewApp() {
 
-  const users = useSelector(storeState => storeState.userModule.users)
+  const users = useSelector(storeState => storeState.userModule.user)
   const loggedInUser = useSelector(storeState => storeState.userModule.user)
   const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 

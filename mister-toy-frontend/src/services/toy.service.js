@@ -43,8 +43,9 @@ function save(toy) {
 }
 
 function getDefaultFilter() {
-    return { txt: '', maxPrice: '', labels: [], inStock: '', sortBy: '', desc: 1 }
+    return { txt: '', maxPrice: '', labels: [], inStock: '' }
 }
+
 function getEmptyToy() {
     return {
         name: "",

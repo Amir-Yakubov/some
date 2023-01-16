@@ -49,25 +49,25 @@ async function save(toy) {
 
     } else {
         // Later, owner is set by the backend
-        // toy.owner = userService.getLoggedinUser()
-        // savedToy = await storageService.post(STORAGE_KEY, toy)
+        toy.owner = userService.getLoggedinUser()
+        savedToy = await storageService.post(STORAGE_KEY, toy)
         savedToy = await httpService.post('toy', toy)
     }
     return savedToy
 }
 
 async function addToyMsg(toyId, txt) {
-    // const toy = await getById(toyId)
-    // if (!toy.msgs) toy.msgs = []
+    const toy = await getById(toyId)
+    if (!toy.msgs) toy.msgs = []
 
-    // const msg = {
-    //     id: utilService.makeId(),
-    //     by: userService.getLoggedinUser(),
-    //     txt
-    // }
-    // toy.msgs.push(msg)
-    // await storageService.put(STORAGE_KEY, toy)    
-    const savedMsg = await httpService.post(`toy/${toyId}/msg`, {txt})
+    const msg = {
+        id: utilService.makeId(),
+        by: userService.getLoggedinUser(),
+        txt
+    }
+    toy.msgs.push(msg)
+    await storageService.put(STORAGE_KEY, toy)
+    const savedMsg = await httpService.post(`toy/${toyId}/msg`, { txt })
     return savedMsg
 }
 
