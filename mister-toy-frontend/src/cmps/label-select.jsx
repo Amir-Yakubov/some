@@ -22,10 +22,8 @@ export function LabelSelect({ onLabelChange }) {
 
     function handleChange(...props) {
         // let { value, name: field, type } = target
-        console.log('props', props)
-        console.log('value', props[0])
+
         const labels = props[0].map((labelInfo) => labelInfo.value)
-        console.log('labels', labels)
         onLabelChange(labels)
     }
 

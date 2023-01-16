@@ -52,7 +52,6 @@ export function PriceChart() {
         console.log(shopLabels)
     }
 
-    console.log('Before return toys', toys)
     getLabels()
 
 
@@ -83,9 +82,7 @@ export function PriceChart() {
             const avrg = priceCount / count
             return { shopLabel, priceCount, count, avrg }
         })
-        console.log('mapArray', mapArray)
         const data = mapArray.map(item => item.avrg)
-        console.log('data####@@@@@@@@@##############', data)
         return data
     }
 

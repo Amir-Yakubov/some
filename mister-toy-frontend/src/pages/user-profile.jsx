@@ -15,9 +15,7 @@ export function UserProfile() {
 
 
     userService.updateProgress(todos)
-    console.log('user', user)
-    console.log('userPref', userPref)
-
+  
     function handlePrefsChange(ev) {
         const field = ev.target.name
         const value = ev.target.value

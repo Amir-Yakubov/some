@@ -24,7 +24,6 @@ export function LabelChart() {
         }
     }
 
-    console.log('Before return toys', toys)
     getLabels()
 
     function getLabels() {
@@ -49,9 +48,7 @@ export function LabelChart() {
             })
             return { shopLabel, count }
         })
-        console.log('mapArray', mapArray)
         const data = mapArray.map(item => item.count)
-        console.log('data########################', data)
         return data
     }
 

@@ -34,7 +34,6 @@ export function ToyFilter({ onSetFilter }) {
     }
 
     function onLabelChange(selectedLabels) {
-        console.log('selectedLabels', selectedLabels)
         setFilterByToEdit((prevFilter) => ({
             ...prevFilter,
             labels: selectedLabels,
@@ -42,7 +41,6 @@ export function ToyFilter({ onSetFilter }) {
     }
 
     function onSortChange(selectedSort) {
-        console.log('selectedSort', selectedSort)
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, sortBy: selectedSort }))
     }
 

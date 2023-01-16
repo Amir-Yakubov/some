@@ -36,7 +36,6 @@ export function ToyEdit() {
     async function onSubmit(values) {
         try {
             if (!values.createdAt) values.createdAt = Date.now()
-            console.log(values)
             await saveToy(values)
             navigate('/toy')
         } catch (err) {

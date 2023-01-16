@@ -56,7 +56,6 @@ export function ToyIndex() {
     }
 
     function setFilter(filterBy) {
-        console.log('setFilter', filterBy)
         onLoadToys(filterBy)
     }
 
