@@ -50,7 +50,11 @@ export function AppHeader() {
                 <NavLink className="first-a" to="/">Home</NavLink> |
                 <NavLink to="/toy"> Toys</NavLink> |
                 <NavLink to="/dashboard"> Dashboard</NavLink> |
-                <NavLink to="/about"> About</NavLink>{/*  |
+                <NavLink to="/about"> About</NavLink>
+                {user && <NavLink to="/user"> Profile</NavLink>}
+
+
+                {/*  |
                 <a href="#" onClick={onToggleCart}>
                     🛒 Cart
                 </a> */}

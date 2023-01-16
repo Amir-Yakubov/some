@@ -13,7 +13,7 @@ export function ToyIndex() {
 
     const toys = useSelector((storeState) => storeState.toyModule.toys)
     const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
-    const shoppingCart = useSelector((storeState) => storeState.toyModule.shoppingCart)
+    // const shoppingCart = useSelector((storeState) => storeState.toyModule.shoppingCart)
     const dispatch = useDispatch()
 
     useEffect(() => {

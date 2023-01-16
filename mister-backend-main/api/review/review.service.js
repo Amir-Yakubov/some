@@ -15,8 +15,8 @@ async function query(filterBy = {}) {
             {
                 $lookup:
                 {
-                    localField: 'byUserId',
                     from: 'user',
+                    localField: 'byUserId',
                     foreignField: '_id',
                     as: 'byUser'
                 }
@@ -27,19 +27,20 @@ async function query(filterBy = {}) {
             {
                 $lookup:
                 {
-                    localField: 'aboutUserId',
-                    from: 'user',
+                    from: 'toys',
+                    localField: 'aboutToyId',
                     foreignField: '_id',
-                    as: 'aboutUser'
+                    as: 'aboutToy'
                 }
             },
             {
-                $unwind: '$aboutUser'
+                $unwind: '$aboutToy'
             }
         ]).toArray()
         reviews = reviews.map(review => {
+
             review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
+            review.aboutUser = { _id: review.aboutToy._id, fullname: review.aboutToy.fullname }
             delete review.byUserId
             delete review.aboutUserId
             return review
@@ -61,7 +62,7 @@ async function remove(reviewId) {
         // remove only if user is owner/admin
         const criteria = { _id: ObjectId(reviewId) }
         if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
-        const {deletedCount} = await collection.deleteOne(criteria)
+        const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
         logger.error(`cannot remove review ${reviewId}`, err)
@@ -88,7 +89,8 @@ async function add(review) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
-    if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
+    if (filterBy.byUserId) criteria.byUserId = ObjectId(filterBy.byUserId)
+    if (filterBy.aboutToyId) criteria.aboutToyId = ObjectId(filterBy.aboutToyId)
     return criteria
 }
 

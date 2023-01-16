@@ -1,12 +1,19 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toyService } from '../services/toy.service.js'
-import { useEffect, useState } from 'react'
+import { useSelector, useEffect, useState } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { loadReviews, addReview, removeReview/* , getActionAddReview  */ } from '../store/review.actions.js'
+import { reviewService } from '../services/review.service.js';
+// import { loadUsers } from '../store/user.action.js'
 
 export function ToyDetalis() {
     const navigate = useNavigate()
     const { toyId } = useParams()
+
+    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+    const reviews = useSelector(storeState => storeState.reviewModule.reviews)
+    const [reviewToEdit, setReviewToEdit] = useState({ txt: '', aboutUserId: '' })
 
     const [toy, setToy] = useState(null)
     const [ischatOpen, setIschatOpen] = useState(false)
@@ -14,7 +21,14 @@ export function ToyDetalis() {
     useEffect(() => {
         if (!toyId) return
         loadToy()
+        onLoadReviews()
     }, [])
+
+    function onLoadReviews() {
+        let filterBy = reviewService.getReviewFilter()
+        filterBy.aboutToyId = toyId
+        loadReviews(filterBy)
+    }
 
     async function loadToy() {
         try {
@@ -31,11 +45,35 @@ export function ToyDetalis() {
         setIschatOpen(!ischatOpen)
     }
 
-    function handleChange({ target }) {
-        let { value, name: field, type } = target
-        value = (type === 'number') ? +value : value
-        console.log(value)
-        // setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+    const handleChange = ev => {
+        const { name, value } = ev.target
+        setReviewToEdit({ ...reviewToEdit, [name]: value })
+    }
+
+    const onAddReview = async ev => {
+        ev.preventDefault()
+        if (!reviewToEdit.txt || !reviewToEdit.aboutUserId) return alert('All fields are required')
+        try {
+            await addReview(reviewToEdit)
+            showSuccessMsg('Review added')
+            setReviewToEdit({ txt: '', aboutUserId: '' })
+        } catch (err) {
+            showErrorMsg('Cannot add review')
+        }
+    }
+
+
+    const onRemove = async reviewId => {
+        try {
+            await removeReview(reviewId)
+            showSuccessMsg('Review removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove')
+        }
+    }
+
+    function canRemove(review) {
+        return review.byUser._id === loggedInUser?._id || loggedInUser?.isAdmin
     }
 
     const chatClass = ischatOpen ? "chat-window open" : "chat-window"
@@ -49,19 +87,47 @@ export function ToyDetalis() {
 
             <section className="toy-detalis">
                 <h2>{toy.name}</h2>
+                <p className='price-tag-detalis'>${toy.price}</p>
                 <p className='toy-desc'>{toy.desc}</p>
                 <section className="labels-detalis">
                     <p>Labels</p>
-                    {toy.labels.map(label => <p>{label}</p>)}
+                    {toy.labels.map(label => <p key={label}>{label}</p>)}
                 </section>
-                <p className='price-tag-detalis'>${toy.price}</p>
-                {
-                    toy.msgs?.map(msg =>
-                        <div className="toy-msgs" key={msg._id}>
-                            <p>{msg.txt}</p>
-                            <p>{msg.by.fullname}</p>
-                        </div>)
-                }
+
+
+                <form onSubmit={onAddReview} className='add-review'>
+                    <label htmlFor="txt">Add review</label>
+                    <textarea
+                        className="review-input"
+                        name='txt'
+                        type="text"
+                        placeholder='Hey!'
+                        onChange={handleChange}
+                    />
+                </form>
+
+                {reviews && <ul className="review-list">
+                    {reviews.map(review => (
+                        <li key={review._id}>
+                            {canRemove(review) &&
+                                <button onClick={() => onRemove(review._id)}>X</button>}
+                            <p>
+                                About:
+                                <Link to={`/user/${review.aboutUser._id}`}>
+                                    {review.aboutUser.fullname}
+                                </Link>
+                            </p>
+                            <h3>{review.txt}</h3>
+                            <p>
+                                By:
+                                <Link to={`/user/${review.byUser._id}`}>
+                                    {review.byUser.fullname}
+                                </Link>
+                            </p>
+                        </li>
+                    ))}
+                </ul>}
+
                 <section className="options-btn">
                     <button> <Link to={`/toy/edit/${toy._id}`}>Edit </Link></button>
                     <button> <Link to={'/toy'}>Back</Link></button>
