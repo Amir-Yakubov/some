@@ -5,7 +5,6 @@ import { useState } from "react"
 import { userService } from "../services/user.service.js"
 import { SET_USER } from "../store/user.reducer.js"
 
-
 export function UserDetails() {
 
     const user = useSelector((storeState => storeState.userModule.user))

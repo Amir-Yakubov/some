@@ -1,7 +1,6 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toyService } from '../services/toy.service.js'
-
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { loadReviews, addReview, removeReview/* , getActionAddReview  */ } from '../store/review.actions.js'
 import { reviewService } from '../services/review.service.js';
@@ -20,8 +19,14 @@ export function ToyDetalis() {
     const [toy, setToy] = useState(null)
     const [ischatOpen, setIschatOpen] = useState(false)
 
+    //Move to chat App
+    // import { socketService, SOCKET_EMIT_SEND_MSG } from "../services/socket.service.js"
+    // const [msg, seTmsg] = useState(false)
+    // const [msgs, setMsgs] = useState(false)
+    // const [topic, setTopic] = useState(false)
+
+
     useEffect(() => {
-        // if (!toyId) return
         loadToy()
         onLoadReviews()
     }, [])
@@ -52,6 +57,12 @@ export function ToyDetalis() {
         const { name, value } = ev.target
         console.log(name, value)
         setReviewToEdit({ ...reviewToEdit, [name]: value })
+    }
+
+    const handleChatChange = ev => {
+        const { name, value } = ev.target
+        console.log(name, value)
+
     }
 
     const onAddReview = async ev => {
@@ -168,7 +179,7 @@ export function ToyDetalis() {
                         className="chat-input"
                         type="text"
                         placeholder='Hey!'
-                        onChange={handleChange}
+                        onChange={handleChatChange}
                     />
                 </div>
                 <img className="chat-img" onClick={onChatClick} src={require(`../assets/img/${chatImg}`)} />

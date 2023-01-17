@@ -1,11 +1,10 @@
 const express = require('express')
-const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const path = require('path')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 const http = require('http').createServer(app)
-const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
 
 // Express App Config
 app.use(cookieParser())
@@ -25,22 +24,21 @@ if (process.env.NODE_ENV === 'production') {
     app.use(cors(corsOptions))
 }
 
-//ALS//
-
-app.all('*', setupAsyncLocalStorage)
-
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const toyRoutes = require('./api/toy/toy.routes')
 const reviewRoutes = require('./api/review/review.routes')
 
-
 // routes
+const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
+app.all('*', setupAsyncLocalStorage)
+const { setupSocketAPI } = require('./services/socket.service')
+
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/toy', toyRoutes)
 app.use('/api/review', reviewRoutes)
-
+setupSocketAPI(http)
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/toy/123 it will still respond with
 // our SPA (single page app) (the index.html file) and allow vue-router to take it from there
@@ -50,6 +48,7 @@ app.get('/**', (req, res) => {
 })
 
 const logger = require('./services/logger.service')
+
 const port = process.env.PORT || 3030
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)
