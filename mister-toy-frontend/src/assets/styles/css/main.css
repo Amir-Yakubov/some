@@ -162,8 +162,8 @@ footer {
   text-align: center;
   position: relative;
   bottom: 0;
-  width: 100vw;
   overflow-y: hidden;
+  opacity: 0;
 }
 
 button {
@@ -306,6 +306,7 @@ input:focus {
   padding: 1rem;
   border-radius: 1rem;
   margin: 10px 10px 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1490196078);
 }
 .toy-filter .filter-input {
   min-height: 38px;
@@ -320,6 +321,7 @@ input:focus {
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1490196078);
   width: 100%;
+  padding: 0.7rem;
 }
 .toy-filter .checkbox {
   width: 40px;
@@ -509,6 +511,16 @@ label {
 
 .toy-detalis-img-container {
   border-radius: 1rem;
+  padding-right: 1rem;
+}
+
+.save-btn {
+  padding: 5px 0;
+}
+
+.save-btn:hover {
+  background-color: darkgreen;
+  color: white;
 }
 
 .toy-detalis-img {
@@ -526,11 +538,12 @@ label {
 
 .options-btn {
   position: absolute;
-  bottom: 20px;
-  right: 13px;
+  bottom: 0.7rem;
+  left: 1rem;
 }
 .options-btn button {
-  padding: 3px 5px;
+  padding: 5px 3px;
+  background-color: rgba(127, 127, 127, 0.616);
 }
 
 .toy-desc {
@@ -545,8 +558,17 @@ label {
 
 .labels-detalis {
   position: absolute;
-  bottom: 0;
-  padding-bottom: 1rem;
+  top: 0;
+  display: flex;
+  right: 0;
+}
+.labels-detalis p {
+  padding: 5px 10px;
+  border-radius: 0.5rem;
+  text-decoration: underline;
+}
+.labels-detalis p::before {
+  content: "#";
 }
 
 .chat-window {
@@ -617,7 +639,35 @@ label {
 }
 
 .add-review {
-  margin-bottom: 70px;
+  display: grid;
+}
+
+.review-list {
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  max-height: 133px;
+}
+.review-list li {
+  display: flex;
+  align-items: center;
+}
+
+.x-btn {
+  padding: 0 5px;
+  background-color: darkred;
+}
+
+.x-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+.toy-reviews-container {
+  align-items: baseline;
+  justify-content: space-evenly;
+  margin: 1rem 0;
+  margin-bottom: 3rem;
 }
 
 .popup-menu {

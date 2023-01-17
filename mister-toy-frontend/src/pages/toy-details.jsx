@@ -1,30 +1,33 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toyService } from '../services/toy.service.js'
-import { useSelector, useEffect, useState } from 'react'
+
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { loadReviews, addReview, removeReview/* , getActionAddReview  */ } from '../store/review.actions.js'
 import { reviewService } from '../services/review.service.js';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 // import { loadUsers } from '../store/user.action.js'
 
 export function ToyDetalis() {
     const navigate = useNavigate()
     const { toyId } = useParams()
 
-    const loggedInUser = useSelector(storeState => storeState.userModule.user)
+    // const loggedInUser = useSelector(storeState => storeState.userModule.user)
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
-    const [reviewToEdit, setReviewToEdit] = useState({ txt: '', aboutUserId: '' })
-
+    const [reviewToEdit, setReviewToEdit] = useState(reviewService.getEmptyReview())
+    console.log('reviews STATE CMP', reviews)
     const [toy, setToy] = useState(null)
     const [ischatOpen, setIschatOpen] = useState(false)
 
     useEffect(() => {
-        if (!toyId) return
+        // if (!toyId) return
         loadToy()
         onLoadReviews()
     }, [])
 
     function onLoadReviews() {
+        console.log('ma ata gnov?')
         let filterBy = reviewService.getReviewFilter()
         filterBy.aboutToyId = toyId
         loadReviews(filterBy)
@@ -47,16 +50,25 @@ export function ToyDetalis() {
 
     const handleChange = ev => {
         const { name, value } = ev.target
+        console.log(name, value)
         setReviewToEdit({ ...reviewToEdit, [name]: value })
     }
 
     const onAddReview = async ev => {
         ev.preventDefault()
-        if (!reviewToEdit.txt || !reviewToEdit.aboutUserId) return alert('All fields are required')
+
+        reviewToEdit.toy = {
+            aboutToyId: toyId,
+            name: toy.name,
+            price: toy.price
+        }
+
+        if (!reviewToEdit.txt || !reviewToEdit.toy.aboutToyId) return alert('All fields are required')
         try {
+            console.log('REVIEWS FROM CMP', reviewToEdit);
             await addReview(reviewToEdit)
             showSuccessMsg('Review added')
-            setReviewToEdit({ txt: '', aboutUserId: '' })
+            setReviewToEdit(reviewService.getEmptyReview())
         } catch (err) {
             showErrorMsg('Cannot add review')
         }
@@ -72,9 +84,9 @@ export function ToyDetalis() {
         }
     }
 
-    function canRemove(review) {
-        return review.byUser._id === loggedInUser?._id || loggedInUser?.isAdmin
-    }
+    // function canRemove(review) {
+    //     return review.byUser._id === loggedInUser?._id || loggedInUser?.isAdmin
+    // }
 
     const chatClass = ischatOpen ? "chat-window open" : "chat-window"
     const loaderImg = 'dots-loader.svg'
@@ -90,43 +102,40 @@ export function ToyDetalis() {
                 <p className='price-tag-detalis'>${toy.price}</p>
                 <p className='toy-desc'>{toy.desc}</p>
                 <section className="labels-detalis">
-                    <p>Labels</p>
+                    {/* <p>Labels</p> */}
                     {toy.labels.map(label => <p key={label}>{label}</p>)}
                 </section>
 
+                <h3>Reviews ⭐⭐⭐⭐⭐</h3>
+                <section className="toy-reviews-container flex">
+                    {reviews && <ul className="review-list">
+                        {reviews.map(review => (
+                            <li key={review._id}>
+                                {/* {canRemove(review) && */}
+                                <button className='x-btn' onClick={() => onRemove(review._id)}>-</button>{/* } */}
+                                <h3>{review.content}</h3>
+                                <p>
+                                    <Link to={`/user/${review.user.aboutUserId}`}>
+                                        By {review.user.nickname}
+                                    </Link>
+                                </p>
+                            </li>
+                        ))}
+                    </ul>}
 
-                <form onSubmit={onAddReview} className='add-review'>
-                    <label htmlFor="txt">Add review</label>
-                    <textarea
-                        className="review-input"
-                        name='txt'
-                        type="text"
-                        placeholder='Hey!'
-                        onChange={handleChange}
-                    />
-                </form>
-
-                {reviews && <ul className="review-list">
-                    {reviews.map(review => (
-                        <li key={review._id}>
-                            {canRemove(review) &&
-                                <button onClick={() => onRemove(review._id)}>X</button>}
-                            <p>
-                                About:
-                                <Link to={`/user/${review.aboutUser._id}`}>
-                                    {review.aboutUser.fullname}
-                                </Link>
-                            </p>
-                            <h3>{review.txt}</h3>
-                            <p>
-                                By:
-                                <Link to={`/user/${review.byUser._id}`}>
-                                    {review.byUser.fullname}
-                                </Link>
-                            </p>
-                        </li>
-                    ))}
-                </ul>}
+                    <form onSubmit={onAddReview} className='add-review'>
+                        <label htmlFor="txt">Add review</label>
+                        <textarea
+                            className="review-input"
+                            name='txt'
+                            type="text"
+                            placeholder='Hey!'
+                            onChange={handleChange}
+                            value={reviewToEdit.txt}
+                        />
+                        <button className='save-btn'>Save</button>
+                    </form>
+                </section>
 
                 <section className="options-btn">
                     <button> <Link to={`/toy/edit/${toy._id}`}>Edit </Link></button>

@@ -7,45 +7,45 @@ async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('review')
-        // const reviews = await collection.find(criteria).toArray()
-        var reviews = await collection.aggregate([
-            {
-                $match: criteria
-            },
-            {
-                $lookup:
-                {
-                    from: 'user',
-                    localField: 'byUserId',
-                    foreignField: '_id',
-                    as: 'byUser'
-                }
-            },
-            {
-                $unwind: '$byUser'
-            },
-            {
-                $lookup:
-                {
-                    from: 'toys',
-                    localField: 'aboutToyId',
-                    foreignField: '_id',
-                    as: 'aboutToy'
-                }
-            },
-            {
-                $unwind: '$aboutToy'
-            }
-        ]).toArray()
-        reviews = reviews.map(review => {
+        const reviews = await collection.find(criteria).toArray()
+        // var reviews = await collection.aggregate([
+        //     {
+        //         $match: criteria
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             from: 'user',
+        //             localField: 'byUserId',
+        //             foreignField: '_id',
+        //             as: 'byUser'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$byUser'
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             from: 'toys',
+        //             localField: 'aboutToyId',
+        //             foreignField: '_id',
+        //             as: 'aboutToy'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$aboutToy'
+        //     }
+        // ]).toArray()
+        // reviews = reviews.map(review => {
 
-            review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutToy._id, fullname: review.aboutToy.fullname }
-            delete review.byUserId
-            delete review.aboutUserId
-            return review
-        })
-
+        //     review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
+        //     review.aboutToy = { _id: review.aboutToy._id, fullname: review.aboutToy.fullname }
+        //     delete review.byUserId
+        //     delete review.aboutToyId
+        //     return review
+        // })
+        // console.log('query return', reviews)
         return reviews
     } catch (err) {
         logger.error('cannot find reviews', err)
@@ -61,8 +61,11 @@ async function remove(reviewId) {
         const collection = await dbService.getCollection('review')
         // remove only if user is owner/admin
         const criteria = { _id: ObjectId(reviewId) }
-        if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
+        // if (!loggedinUser.isAdmin) 
+        // criteria.byUserId = ObjectId(loggedinUser._id)
+        console.log('criteria', criteria);
         const { deletedCount } = await collection.deleteOne(criteria)
+        console.log('deletedCount', deletedCount);
         return deletedCount
     } catch (err) {
         logger.error(`cannot remove review ${reviewId}`, err)
@@ -73,11 +76,34 @@ async function remove(reviewId) {
 
 async function add(review) {
     try {
+
+        // review = {
+        //     txt,
+        //     toy: {
+        //         aboutToyId,
+        //         name,
+        //         price
+        //     },
+        //     user: {
+        //         aboutUserId,
+        //         nickname
+        //     }
+        // }
+
         const reviewToAdd = {
-            byUserId: ObjectId(review.byUserId),
-            aboutUserId: ObjectId(review.aboutUserId),
-            txt: review.txt
+            content: review.txt,
+            toy: {
+                aboutToyId: ObjectId(review.toy.aboutToyId),
+                name: review.toy.name,
+                price: review.toy.price
+            },
+            user: {
+                aboutUserId: ObjectId(review.user.aboutUserId),
+                nickname: review.user.nickname,
+            },
+
         }
+
         const collection = await dbService.getCollection('review')
         await collection.insertOne(reviewToAdd)
         return reviewToAdd

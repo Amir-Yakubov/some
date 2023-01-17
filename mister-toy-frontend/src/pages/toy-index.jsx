@@ -63,7 +63,7 @@ export function ToyIndex() {
     const bannerImg = 'banner.jpg'
 
     return <section className='main-container'>
-            {/* <h3 className='main-app-title'>TEDS Toys shop</h3> */}
+        {/* <h3 className='main-app-title'>TEDS Toys shop</h3> */}
         <ToyFilter onSetFilter={setFilter} />
         <img className="banner-img" src={require(`../assets/img/${bannerImg}`)} />
         <main>

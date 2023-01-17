@@ -23,6 +23,16 @@
 
 .toy-detalis-img-container {
     border-radius: 1rem;
+    padding-right: 1rem;
+}
+
+.save-btn {
+    padding: 5px 0;
+}
+
+.save-btn:hover {
+    background-color: darkgreen;
+    color: white;
 }
 
 .toy-detalis-img {
@@ -41,11 +51,12 @@
 
 .options-btn {
     position: absolute;
-    bottom: 20px;
-    right: 13px;
+    bottom: 0.7rem;
+    left: 1rem;
 
     button {
-        padding: 3px 5px;
+        padding: 5px 3px;
+        background-color: rgba(127, 127, 127, 0.616);
     }
 }
 
@@ -61,8 +72,18 @@
 
 .labels-detalis {
     position: absolute;
-    bottom: 0;
-    padding-bottom: 1rem;
+    top: 0;
+    display: flex;
+    right: 0;
+
+    p {
+        padding: 5px 10px;
+        border-radius: 0.5rem;
+        text-decoration: underline;
+    }
+    p::before {
+        content: "#";
+    }
 }
 
 .chat-window {
@@ -132,5 +153,33 @@
 }
 
 .add-review {
-    margin-bottom: 70px;
+    display: grid;
+}
+
+.review-list {
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+    max-height: 133px;
+    li {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.x-btn {
+    padding: 0 5px;
+    background-color: darkred;
+}
+.x-btn:hover {
+    background-color: red;
+    color: white;
+}
+
+.toy-reviews-container {
+    align-items: baseline;
+    // justify-content: space-evenly;
+    justify-content: space-evenly;
+    margin: 1rem 0;
+    margin-bottom: 3rem;
 }

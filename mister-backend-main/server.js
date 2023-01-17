@@ -5,6 +5,7 @@ const path = require('path')
 
 const app = express()
 const http = require('http').createServer(app)
+const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
 
 // Express App Config
 app.use(cookieParser())
@@ -23,6 +24,11 @@ if (process.env.NODE_ENV === 'production') {
     }
     app.use(cors(corsOptions))
 }
+
+//ALS//
+
+app.all('*', setupAsyncLocalStorage)
+
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const toyRoutes = require('./api/toy/toy.routes')

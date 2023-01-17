@@ -14,6 +14,7 @@ export function getActionSetWatchedUser(user) {
 
 export async function loadReviews(filterBy) {
   try {
+    console.log('YOTZA LEAKIFA', filterBy)
     const reviews = await reviewService.query(filterBy)
     store.dispatch({ type: 'SET_REVIEWS', reviews })
 
@@ -26,9 +27,11 @@ export async function loadReviews(filterBy) {
 export async function addReview(review) {
   try {
     const addedReview = await reviewService.add(review)
+    console.log('GAM LEPO EGATI', review)
     store.dispatch(getActionAddReview(addedReview))
-    const { score } = addedReview.byUser
-    store.dispatch({ type: 'SET_SCORE', score })
+    // const { score } = addedReview.byUser
+    // store.dispatch({ type: 'SET_SCORE', score })
+    // return review
   } catch (err) {
     console.log('ReviewActions: err in addReview', err)
     throw err

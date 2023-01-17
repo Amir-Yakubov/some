@@ -1,10 +1,11 @@
 import { httpService } from './http.service'
-import { storageService } from './async-storage.service'
+// import { storageService } from './async-storage.service'
 import { userService } from './user.service'
+// import { getActionRemoveReview, getActionAddReview } from '../store/review.actions'
+// import { store } from '../store/store'
+// import { showSuccessMsg } from '../services/event-bus.service'
+import { toyService } from './toy.service'
 // import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_ABOUT_YOU } from './socket.service'
-import { getActionRemoveReview, getActionAddReview } from '../store/review.actions'
-import { store } from '../store/store'
-import { showSuccessMsg } from '../services/event-bus.service'
 
 // ;(() => {
 //   socketService.on(SOCKET_EVENT_REVIEW_ADDED, (review) => {
@@ -21,41 +22,50 @@ export const reviewService = {
     add,
     query,
     remove,
-    getReviewFilter
+    getReviewFilter,
+    getEmptyReview
 }
 
+
+function getEmptyReview() {
+    return {
+        txt: '',
+        toy: {
+            aboutToyId: '',
+            name: '',
+            price: ''
+        },
+        user: {
+            aboutUserId: '',
+            nickname: ''
+        }
+    }
+}
+
+
+
 function query(filterBy) {
-    var queryStr = (!filterBy) ? '' : `?name=${filterBy.name}&sort=anaAref`
+    console.log('walla nishlah', filterBy)
+    var queryStr = (!filterBy) ? '' : `?content=${filterBy.txt}`
     return httpService.get(`review${queryStr}`)
     // return storageService.query('review')
 }
 
 async function remove(reviewId) {
+    console.log('nishlah?',reviewId)
     await httpService.delete(`review/${reviewId}`)
     // await storageService.remove('review', reviewId)
 }
 
-async function add({ txt, aboutUserId }) {
-    const addedReview = await httpService.post(`review`, { txt, aboutUserId })
-
-    const aboutUser = await userService.getById(aboutUserId)
-
-    const reviewToAdd = {
-        txt,
-        byUser: userService.getLoggedinUser(),
-        aboutUser: {
-            _id: aboutUser._id,
-            fullname: aboutUser.fullname,
-            imgUrl: aboutUser.imgUrl
-        }
-    }
-
-    reviewToAdd.byUser.score += 10
-    await userService.update(reviewToAdd.byUser)
+async function add(review) {
+    console.log('BEFORE HTTP', review)
+    const addedReview = await httpService.post(`review`, review)
+    // await userService.update(reviewToAdd.byUser)
     // const addedReview = await storageService.post('review', reviewToAdd)
+    console.log('GOT BACK IN THE FRONT', addedReview)
     return addedReview
 }
 
 function getReviewFilter() {
-    return { name: '' }
+    return { txt: '' }
 }
